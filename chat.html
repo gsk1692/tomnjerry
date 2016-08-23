@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tom &amp; Jerry</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="nav nav-tabs">
+				<li>
+					<a href="index.html">Home</a>
+				</li>
+				<li>
+					<a href="char.html">Characters</a>
+				</li>
+				<li class="">
+					<a href="info.html">Site Info</a>
+				</li>
+				<li class="active">
+					<a href="#">Chat Room</a>
+				</li>
+				
+			</ul>
+			<br>
+			<br>
+			<ul id="messages" class="list-group"></ul>
+			<br>
+			<br>
+			<div class="form-group">
+			<form>
+				<div id="name_area">
+					<label>Enter name:</label>
+					<input class="form-control input-lg" id="uname" type="text" placeholder="Enter Name" autocomplete="off"><button type="button" id="name_btn" class="btn btn-primary">Set Name</button>
+				</div>
+				<div id="alerts"></div>
+				<br>
+    			<label for="inputlg">Enter Chat Text</label>
+    			<input class="form-control input-lg" id="inputlg" type="text" placeholder="Enter Chat Text" autocomplete="off">
+    			<button type="submit" class="btn btn-primary">Send</button>
+    		</form>
+  			</div>
+		</div>
+	</div>
+</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="node_modules/socket.io-client/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		sessionStorage.name = ""
+		$('#name_btn').click(function() {
+			// body...
+			sessionStorage.name = $('#uname').val()
+			document.getElementById('name_area').innerHTML = "";
+			document.getElementById('alerts').innerHTML = '<div class="alert alert-success alert-dismissible" role="alert"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Name Set Successfully!!!</div>'
+
+		});
+	  	var socket = io('http://localhost:3000');
+	  	$('form').submit(function(){
+	  		//var uname = $('#uname').val()
+			var mess = $('#inputlg').val()
+			if (sessionStorage.name == "") {
+				document.getElementById('alerts').innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Set Name First!</div>'
+				//return;
+			}
+			else{
+				var mess_str = sessionStorage.name + ": " + mess;
+			    socket.emit('chat message', mess_str);
+			    $('#inputlg').val('');
+			    return false;
+			}
+			
+	  	});
+	  	socket.on('chat message', function(msg){
+        	$('#messages').append($('<li class="list-group-item">').text(msg));
+      	});
+	</script>
+  </body>
+</html>
