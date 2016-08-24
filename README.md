@@ -24,5 +24,10 @@ Head on to your browser and type https://localhost:4443" ("http://localhost:3000
 <br />
 Click on the Chat Room link in navbar
 
+#For HTTPS
+To get the cert.pem and key.pem, you must run the openssl command
+<br />
+openssl req -nodes -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+
 
 #Voila! That's it!
