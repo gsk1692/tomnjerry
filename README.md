@@ -10,7 +10,7 @@ Server is written in Node.js
 Just a sample website. Click on the link "Chat Room" in navbar to experience the chat
 
 #How to run (For those not familiar to Node.js)
-Put all the files in a project driectory of your choice
+Put all the files in a project directory of your choice
 <br />
 Open Terminal
 <br />
