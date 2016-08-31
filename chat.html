@@ -59,7 +59,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="node_modules/socket.io-client/socket.io.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	
 	<script>
 		sessionStorage.name = ""
 		$('#name_btn').click(function() {
@@ -69,7 +69,7 @@
 			document.getElementById('alerts').innerHTML = '<div class="alert alert-success alert-dismissible" role="alert"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Name Set Successfully!!!</div>'
 
 		});
-	  	var socket = io('http://localhost:3000');
+	  	var socket = io();
 	  	$('form').submit(function(){
 	  		//var uname = $('#uname').val()
 			var mess = $('#inputlg').val()

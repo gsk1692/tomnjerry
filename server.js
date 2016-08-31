@@ -9,13 +9,17 @@ var options = {
   cert: fs.readFileSync('cert.pem') //Your generated certificate after running openssl command
 };
 
+//Uncomment this if you don't want HTTP Server
 /*var server = app.listen(3000,function(){
   console.log("Live at Port 3000");
 });*/
 
 server = https.createServer(options, app).listen(4443, function () {
+//My work required HTTPS Server. Comment this if you don't want HTTPS
+var server = https.createServer(options, app).listen(4443, function () {
   console.log("HTTPS Server running on port 4443")
 });
+
 
 var router = express.Router();
 var io = require('socket.io').listen(server)
