@@ -14,7 +14,7 @@ var options = {
   console.log("Live at Port 3000");
 });*/
 
-server = https.createServer(options, app).listen(4443, function () {
+//server = https.createServer(options, app).listen(4443, function () {
 //My work required HTTPS Server. Comment this if you don't want HTTPS
 var server = https.createServer(options, app).listen(4443, function () {
   console.log("HTTPS Server running on port 4443")
